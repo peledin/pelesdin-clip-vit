@@ -9,14 +9,76 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>ch.zhaw.deeplearningjava</groupId>
-	<artifactId>pelesdin-clip</artifactId>
+	<artifactId>pelesdin-sentiment</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>pelesdin-clip</name>
+	<name>pelesdin-sentiment</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
+
+		<dependency>
+			<groupId>ai.djl</groupId>
+			<artifactId>basicdataset</artifactId>
+			<version>0.22.1</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>ai.djl.pytorch</groupId>
+			<artifactId>pytorch-model-zoo</artifactId>
+			<version>0.22.1</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>ai.djl</groupId>
+			<artifactId>model-zoo</artifactId>
+			<version>0.22.1</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>ai.djl</groupId>
+			<artifactId>api</artifactId>
+			<version>0.22.1</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>ai.djl.pytorch</groupId>
+			<artifactId>pytorch-engine</artifactId>
+			<version>0.22.1</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>ai.djl.timeseries</groupId>
+			<artifactId>timeseries</artifactId>
+			<version>0.22.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>ai.djl.mxnet</groupId>
+			<artifactId>mxnet-engine</artifactId>
+			<version>0.22.1</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>ai.djl.mxnet</groupId>
+			<artifactId>mxnet-model-zoo</artifactId>
+			<version>0.22.1</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>ai.djl.huggingface</groupId>
+			<artifactId>tokenizers</artifactId>
+			<version>0.22.1</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -27,6 +89,13 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>
