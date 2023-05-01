@@ -50,4 +50,8 @@ public final class ImageTextComparison {
             return new double[] { Math.exp(logit0[0]) / total, Math.exp(logit1[0]) / total };
         }
     }
+
+    public static double[] compareTextAndImage(java.awt.Image img, String text1) {
+        return null;
+    }
 }

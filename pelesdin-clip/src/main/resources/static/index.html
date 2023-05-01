@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Comparison</title>
+    <style>
+        /* Add your custom styles here */
+    </style>
+</head>
+<body>
+    <h1>Compare Image with Text</h1>
+    <form id="comparison-form">
+        <label for="text1">Text 1:</label>
+        <input type="text" id="text1" name="text1" required>
+        <br>
+        <label for="text2">Text 2:</label>
+        <input type="text" id="text2" name="text2" required>
+        <br>
+        <label for="imageUrl">Image URL:</label>
+        <input type="url" id="imageUrl" name="imageUrl" required>
+        <br>
+        <button type="submit">Compare</button>
+    </form>
+    <div id="result"></div>
+
+    <script>
+        document.getElementById("comparison-form").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const text1 = document.getElementById("text1").value;
+            const text2 = document.getElementById("text2").value;
+            const imageUrl = document.getElementById("imageUrl").value;
+            const response = await fetch(`/api/compare?text1=${encodeURIComponent(text1)}&text2=${encodeURIComponent(text2)}&imageUrl=${encodeURIComponent(imageUrl)}`);
+            if (response.ok) {
+                const probabilities = await response.json();
+                document.getElementById("result").innerHTML = `Probabilities: Text 1: ${probabilities[0]}, Text 2: ${probabilities[1]}`;
+            } else {
+                document.getElementById("result").innerHTML = "An error occurred.";
+            }
+        });
+    </script>
+</body>
+</html>
