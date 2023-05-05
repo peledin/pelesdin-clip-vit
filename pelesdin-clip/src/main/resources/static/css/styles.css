@@ -1,10 +1,38 @@
 body {
     margin: 20px;
     font-family: 'Roboto', sans-serif;
+    background-color: #1c2b4a;
+    color: #ffffff;
+}
+
+h1 {
+    font-family: 'Roboto Slab', serif;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
 }
 
 .card {
+    padding: 30px;
+    background-color: #2f3c64;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.input-container, .preview-container {
     padding: 20px;
+    margin-bottom: 20px;
+    background-color: #3c4b7a;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .image-container {
@@ -13,8 +41,8 @@ body {
     align-items: center;
     margin-top: 1em;
     width: 100%;
-    height: 300px; 
-    overflow: hidden; 
+    height: 300px;
+    overflow: hidden;
 }
 
 .image-container img {
@@ -22,3 +50,119 @@ body {
     max-height: 100%;
     object-fit: contain;
 }
+
+.btn-primary {
+    background-color: #5170b6;
+    border-color: #5170b6;
+    box-shadow: none;
+}
+
+.btn-primary:hover {
+    background-color: #68a0d4;
+    border-color: #68a0d4;
+    }
+    
+    #shuffleButton {
+    display: inline-block;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #5170b6;
+    background-color: #ffffff;
+    border: 1px solid #5170b6;
+    border-radius: 0.25rem;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+    
+    #shuffleButton:hover {
+    background-color: #5170b6;
+    color: #ffffff;
+    }
+    
+    .result-container {
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #3c4b7a;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .alert {
+    background-color: #4b618f;
+    border: none;
+    color: #ffffff;
+    font-weight: 500;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .progress {
+    height: 20px;
+    border-radius: 10px;
+    background-color: #3c4b7a;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+    
+    .progress-bar {
+    background-color: #5170b6;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+
+    #shuffleButton {
+        margin-left: 10px;
+    }
+    
+    .bi {
+        display: inline-block;
+        vertical-align: -.125em;
+        font-size: 1.5em;
+    }
+
+    .input-group-append {
+        display: flex;
+        align-items: center;
+        padding-left: 10px;
+        cursor: pointer;
+    }
+    
+    
+    .results-container {
+        width: 100%;
+    }
+    
+    .result-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 15px;
+    }
+    
+    .result-label {
+        font-weight: bold;
+    }
+    
+    .progress {
+        flex-grow: 1;
+        margin-left: 10px;
+        margin-right: 10px;
+        height: 20px;
+        border-radius: 10px;
+        background-color: #3c4b7a;
+        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+    
+    .progress-bar {
+        background-color: #5170b6;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+    
+    .result-percentage {
+        min-width: 35px;
+        text-align: right;
+    }
+    
+    

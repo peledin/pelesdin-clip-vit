@@ -22,9 +22,6 @@ document.getElementById("comparison-form").addEventListener("submit", async (e) 
 });
 
 
-
-
-
 function getRandomImage() {
   const index = Math.floor(Math.random() * cocoImages.length);
   return cocoImages[index];
