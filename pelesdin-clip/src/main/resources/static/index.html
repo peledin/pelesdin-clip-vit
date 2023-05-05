@@ -3,99 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
     <title>Image Comparison</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 </head>
-<style>
-body {
-  margin: 20px;
-}
-form {
-  margin-bottom: 20px;
-}
-.card {
-  padding: 20px;
-}
-.image-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 1em;
-}
-</style>
 <body>
-    <h1 class="mb-4">Compare Image with Text</h1>
-    <div class="card">
-        <form id="comparison-form" class="row g-3">
-            <div class="col-md-6">
-                <label for="text1" class="form-label">Text 1:</label>
-                <input type="text" class="form-control" id="text1" name="text1" required>
+    <div class="container">
+        <h1 class="mb-4">Compare Image with Text</h1>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card">
+                    <form id="comparison-form" class="row g-3">
+                        <div class="col-md-6">
+                            <label for="text1" class="form-label">Text 1:</label>
+                            <input type="text" class="form-control" id="text1" name="text1" minlength="3" placeholder="Beschreibung des Bildes" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="text2" class="form-label">Text 2:</label>
+                            <input type="text" class="form-control" id="text2" name="text2" minlength="3" placeholder="Alternative Beschreibung" required>
+                        </div>
+                        <div class="col-12">
+                            <label for="imageUrl" class="form-label">Image URL:</label>
+                            <input type="url" class="form-control" id="imageUrl" name="imageUrl" placeholder="http://example.com/image.jpg" required>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Compare</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="col-md-6">
-                <label for="text2" class="form-label">Text 2:</label>
-                <input type="text" class="form-control" id="text2" name="text2" required>
+            <div class="col-lg-6">
+                <div class="card p-3">
+                    <button id="shuffleButton" class="btn btn-secondary mb-3">Shuffle</button>
+                    <div class="image-container">
+                        <img id="imagePreview" src="" alt="Image preview" class="img-fluid">
+                    </div>
+                    <div class="progress d-none" id="progress-bar-container">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" id="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+                      </div>
+                    <div id="result" class="alert alert-info d-none mt-3"></div>
+                </div>
             </div>
-            <div class="col-12">
-                <label for="imageUrl" class="form-label">Image URL:</label>
-                <input type="url" class="form-control" id="imageUrl" name="imageUrl" required>
-            </div>
-            <button id="shuffleButton">Shuffle</button>
-            <div class="image-container">
-                <img id="imagePreview" src="" alt="Image preview" style="max-width: 100%; max-height: 300px;">
-            </div>
-            <div class="col-12">
-                <button type="submit" class="btn btn-primary">Compare</button>
-            </div>
-        </form>
+        </div>
     </div>
-    <div id="result" class="alert alert-info d-none"></div>
-    <script>
-    
-
-document.getElementById("comparison-form").addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const resultElement = document.getElementById("result");
-    resultElement.classList.add("d-none");
-    const text1 = document.getElementById("text1").value;
-    const text2 = document.getElementById("text2").value;
-    const imageUrl = document.getElementById("imageUrl").value;
-    const response = await fetch(`/api/compare?text1=${encodeURIComponent(text1)}&text2=${encodeURIComponent(text2)}&imageUrl=${encodeURIComponent(imageUrl)}`);
-    console.log('Response:', response);
-    if (response.ok) {
-        const probabilities = await response.json();
-        resultElement.innerHTML = `Probabilities: Text 1: ${probabilities[0]}, Text 2: ${probabilities[1]}`;
-        console.log('Probabilities:', probabilities);
-    } else {
-        resultElement.innerHTML = "An error occurred.";
-    }
-    resultElement.classList.remove("d-none");
-});
-
-function getRandomImage() {
-    const index = Math.floor(Math.random() * cocoImages.length);
-    return cocoImages[index];
-}
-
-document.getElementById("shuffleButton").addEventListener("click", () => {
-    const randomImage = getRandomImage();
-    document.getElementById("imagePreview").src = randomImage;
-    document.getElementById("imageUrl").value = randomImage;
-});
-
-const cocoImages = [
-    "http://images.cocodataset.org/val2017/000000039769.jpg",
-    "http://images.cocodataset.org/val2017/000000252219.jpg",
-    "http://images.cocodataset.org/val2017/000000000285.jpg",       
-    "http://images.cocodataset.org/val2017/000000000724.jpg",
-    "http://images.cocodataset.org/val2017/000000002149.jpg",
-    "http://images.cocodataset.org/val2017/000000002299.jpg",
-    "http://images.cocodataset.org/val2017/000000001296.jpg",
-    "http://images.cocodataset.org/val2017/000000002153.jpg",
-    "http://images.cocodataset.org/val2017/000000001000.jpg",
-    "http://images.cocodataset.org/val2017/000000008532.jpg",
-    // ...
-];
-
-    </script>
+    <div id="spinner" class="spinner-border d-none" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+    <script src="./js/main.js"></script>
 </body>
 </html>
