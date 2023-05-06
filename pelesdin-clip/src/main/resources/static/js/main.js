@@ -70,10 +70,10 @@ function displayHint(probabilities) {
   let hintText;
 
   if (text1Percentage >= 30 && text1Percentage <= 70 && text2Percentage >= 30 && text2Percentage <= 70) {
-    hintText = "Die Klassifizierung ist nicht eindeutig. Versuchen Sie andere Begriffe zu verwenden.";
+    hintText = "The classification is inconclusive. Try to use other terms.";
   } else {
     const higherPercentageText = text1Percentage > text2Percentage ? document.getElementById("text1").value : document.getElementById("text2").value;
-    hintText = `Das Bild wird mit höherer Wahrscheinlichkeit als <strong>${higherPercentageText}</strong> klassifiziert.`;
+    hintText = `The image is more likely to be classified as <strong>${higherPercentageText}</strong>.`;
   }
 
   hintElement.innerHTML = hintText;
