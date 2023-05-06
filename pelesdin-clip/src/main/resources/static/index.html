@@ -45,10 +45,22 @@
                     <div class="image-container">
                         <img id="imagePreview" src="" alt="Image preview" class="img-fluid">
                     </div>
-                    <div class="progress d-none" id="progress-bar-container">
-                        <div class="progress-bar progress-bar-striped progress-bar-animated" id="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+                    <div id="result" class="d-none mt-3">
+                        <div id="text1-container" class="result-row">
+                          <span id="text1-label" class="text-label"></span>
+                          <div class="progress">
+                            <div id="text1-progress" class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+                          </div>
+                          <span id="text1-percentage" class="percentage"></span>
+                        </div>
+                        <div id="text2-container" class="result-row">
+                          <span id="text2-label" class="text-label"></span>
+                          <div class="progress">
+                            <div id="text2-progress" class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+                          </div>
+                          <span id="text2-percentage" class="percentage"></span>
+                        </div>
                       </div>
-                    <div id="result" class="alert alert-info d-none mt-3"></div>
                 </div>
             </div>
         </div>

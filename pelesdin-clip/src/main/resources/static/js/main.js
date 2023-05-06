@@ -2,8 +2,6 @@
 document.getElementById("comparison-form").addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  // Zeige den Fortschrittsbalken an und verstecke das Ergebniselement
-  showProgressBar();
 
   // Werte der Eingabefelder abrufen
   const text1 = document.getElementById("text1").value;
@@ -13,42 +11,31 @@ document.getElementById("comparison-form").addEventListener("submit", async (e) 
   // API-Anfrage senden
   const response = await fetch(`/api/compare?text1=${encodeURIComponent(text1)}&text2=${encodeURIComponent(text2)}&imageUrl=${encodeURIComponent(imageUrl)}`);
 
-  // Fortschrittsbalken ausblenden
-  hideProgressBar();
+
 
   // Ergebnis anzeigen
   if (response.ok) {
       const probabilities = await response.json();
-      displayResult(`Probabilities: Text 1: ${(probabilities[0] * 100).toFixed(2)}%, Text 2: ${(probabilities[1] * 100).toFixed(2)}%`);
+      displayResult([probabilities[0], probabilities[1]]);
   } else {
       displayResult("An error occurred.");
   }
 });
 
-function showProgressBar() {
-  const progressBarContainer = document.getElementById("progress-bar-container");
-  const progressBar = document.getElementById("progress-bar");
+function displayResult(probabilities) {
   const resultElement = document.getElementById("result");
 
-  resultElement.classList.add("d-none");
-  progressBarContainer.classList.remove("d-none");
-  progressBar.style.width = "100%";
-}
+  document.getElementById("text1-label").textContent = `${document.getElementById("text1").value}:`;
+  document.getElementById("text1-progress").style.width = `${(probabilities[0] * 100).toFixed(2)}%`;
+  document.getElementById("text1-percentage").textContent = `${(probabilities[0] * 100).toFixed(2)}%`;
 
-function hideProgressBar() {
-  const progressBarContainer = document.getElementById("progress-bar-container");
-  const progressBar = document.getElementById("progress-bar");
+  document.getElementById("text2-label").textContent = `${document.getElementById("text2").value}:`;
+  document.getElementById("text2-progress").style.width = `${(probabilities[1] * 100).toFixed(2)}%`;
+  document.getElementById("text2-percentage").textContent = `${(probabilities[1] * 100).toFixed(2)}%`;
 
-  progressBarContainer.classList.add("d-none");
-  progressBar.style.width = "0%";
-}
-
-function displayResult(message) {
-  const resultElement = document.getElementById("result");
-
-  resultElement.innerHTML = message;
   resultElement.classList.remove("d-none");
 }
+
 
 // Event-Listener für den Shuffle-Button
 document.getElementById("shuffleButton").addEventListener("click", () => {
@@ -88,3 +75,20 @@ document.getElementById("imageUrl").addEventListener("input", () => {
   // Initialisiere die Bildvorschau und das imageURL-Eingabefeld mit einem zufälligen Bild
   const initialImage = getRandomImage();
   updateImagePreview(initialImage);
+
+  function displayPlaceholderResult() {
+    const resultElement = document.getElementById("result");
+  
+    document.getElementById("text1-label").textContent = `Text 1:`;
+    document.getElementById("text1-progress").style.width = `0%`;
+    document.getElementById("text1-percentage").textContent = `0%`;
+  
+    document.getElementById("text2-label").textContent = `Text 2:`;
+    document.getElementById("text2-progress").style.width = `0%`;
+    document.getElementById("text2-percentage").textContent = `0%`;
+  
+    resultElement.classList.remove("d-none");
+  }
+  
+  // Anfangswerte setzen und Resultat mit Platzhaltern anzeigen
+displayPlaceholderResult();
