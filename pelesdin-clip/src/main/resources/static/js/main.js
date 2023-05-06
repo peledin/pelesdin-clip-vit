@@ -1,7 +1,10 @@
 // Event-Listener für das Formular-Submit-Event
-document.getElementById("comparison-form").addEventListener("submit", async (e) => {
+document.getElementById("comparison-form").addEventListener("submit", handleSubmit);
+
+async function handleSubmit(e) {
   e.preventDefault();
 
+  setLoadingAnimationState(true);
 
   // Werte der Eingabefelder abrufen
   const text1 = document.getElementById("text1").value;
@@ -11,29 +14,70 @@ document.getElementById("comparison-form").addEventListener("submit", async (e) 
   // API-Anfrage senden
   const response = await fetch(`/api/compare?text1=${encodeURIComponent(text1)}&text2=${encodeURIComponent(text2)}&imageUrl=${encodeURIComponent(imageUrl)}`);
 
-
+  setLoadingAnimationState(false);
 
   // Ergebnis anzeigen
   if (response.ok) {
-      const probabilities = await response.json();
-      displayResult([probabilities[0], probabilities[1]]);
+    const probabilities = await response.json();
+    displayResult([probabilities[0], probabilities[1]]);
   } else {
-      displayResult("An error occurred.");
+    displayResult("An error occurred.");
   }
-});
+}
+
+// Ladeanimation ein- oder ausschalten
+function setLoadingAnimationState(isLoading) {
+  const text1Progress = document.getElementById("text1-progress");
+  const text2Progress = document.getElementById("text2-progress");
+
+  if (isLoading) {
+    text1Progress.classList.add("progress-bar-loading");
+    text2Progress.classList.add("progress-bar-loading");
+  } else {
+    text1Progress.classList.remove("progress-bar-loading");
+    text2Progress.classList.remove("progress-bar-loading");
+  }
+}
+
 
 function displayResult(probabilities) {
   const resultElement = document.getElementById("result");
 
   document.getElementById("text1-label").textContent = `${document.getElementById("text1").value}:`;
-  document.getElementById("text1-progress").style.width = `${(probabilities[0] * 100).toFixed(2)}%`;
-  document.getElementById("text1-percentage").textContent = `${(probabilities[0] * 100).toFixed(2)}%`;
+  const text1Progress = document.getElementById("text1-progress");
+  const text1Percentage = (probabilities[0] * 100).toFixed(2);
+  text1Progress.style.width = `${text1Percentage}%`;
+  setProgressBarColor(text1Progress, text1Percentage);
+  document.getElementById("text1-percentage").textContent = `${text1Percentage}%`;
 
   document.getElementById("text2-label").textContent = `${document.getElementById("text2").value}:`;
-  document.getElementById("text2-progress").style.width = `${(probabilities[1] * 100).toFixed(2)}%`;
-  document.getElementById("text2-percentage").textContent = `${(probabilities[1] * 100).toFixed(2)}%`;
+  const text2Progress = document.getElementById("text2-progress");
+  const text2Percentage = (probabilities[1] * 100).toFixed(2);
+  text2Progress.style.width = `${text2Percentage}%`;
+  setProgressBarColor(text2Progress, text2Percentage);
+  document.getElementById("text2-percentage").textContent = `${text2Percentage}%`;
 
   resultElement.classList.remove("d-none");
+  displayHint(probabilities);
+}
+
+// Funktion zum Anzeigen eines Hinweises
+function displayHint(probabilities) {
+  const hintElement = document.getElementById("hint");
+  const text1Percentage = probabilities[0] * 100;
+  const text2Percentage = probabilities[1] * 100;
+
+  let hintText;
+
+  if (text1Percentage >= 30 && text1Percentage <= 70 && text2Percentage >= 30 && text2Percentage <= 70) {
+    hintText = "Die Klassifizierung ist nicht eindeutig. Versuchen Sie andere Begriffe zu verwenden.";
+  } else {
+    const higherPercentageText = text1Percentage > text2Percentage ? document.getElementById("text1").value : document.getElementById("text2").value;
+    hintText = `Das Bild wird mit höherer Wahrscheinlichkeit als <strong>${higherPercentageText}</strong> klassifiziert.`;
+  }
+
+  hintElement.innerHTML = hintText;
+  hintElement.classList.remove("d-none");
 }
 
 
@@ -71,6 +115,18 @@ document.getElementById("imageUrl").addEventListener("input", () => {
       "http://images.cocodataset.org/val2017/000000002299.jpg",
       // Weitere URLs hier hinzufügen
   ];
+
+  // Prozentbalken einfärben
+  function setProgressBarColor(progressBar, value) {
+    if (value >= 70) {
+      progressBar.style.backgroundColor = "green";
+    } else if (value <= 30) {
+      progressBar.style.backgroundColor = "red";
+    } else {
+      progressBar.style.backgroundColor = "yellow";
+    }
+  }  
+  
 
   // Initialisiere die Bildvorschau und das imageURL-Eingabefeld mit einem zufälligen Bild
   const initialImage = getRandomImage();
