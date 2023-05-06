@@ -148,3 +148,9 @@ document.getElementById("imageUrl").addEventListener("input", () => {
   
   // Anfangswerte setzen und Resultat mit Platzhaltern anzeigen
 displayPlaceholderResult();
+
+// Nachtmodus Schalter
+document.getElementById("nightModeSwitch").addEventListener("change", (e) => {
+  const nightModeStylesheet = document.getElementById("night-mode-stylesheet");
+  nightModeStylesheet.disabled = !e.target.checked;
+});

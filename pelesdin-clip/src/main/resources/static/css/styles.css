@@ -1,6 +1,10 @@
 /* Allgemeine Stile */
 body {
-    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+    margin: 0;
     font-family: 'Roboto', sans-serif;
     background-color: #1c2b4a;
     color: #ffffff;
