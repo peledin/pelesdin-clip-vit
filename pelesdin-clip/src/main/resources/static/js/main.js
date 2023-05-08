@@ -11,8 +11,14 @@ async function handleSubmit(e) {
   const text2 = document.getElementById("text2").value;
   const imageUrl = document.getElementById("imageUrl").value;
 
+  // Timer starten
+  startTimer();
+
   // API-Anfrage senden
   const response = await fetch(`/api/compare?text1=${encodeURIComponent(text1)}&text2=${encodeURIComponent(text2)}&imageUrl=${encodeURIComponent(imageUrl)}`);
+
+  // Timer stoppen
+  stopTimer();
 
   setLoadingAnimationState(false);
 
@@ -24,6 +30,25 @@ async function handleSubmit(e) {
     displayResult("An error occurred.");
   }
 }
+
+//Timer
+let timerInterval;
+function startTimer() {
+  const startTime = performance.now();
+  const loadingTimeElement = document.getElementById("loading-time");
+
+  timerInterval = setInterval(() => {
+    const currentTime = performance.now();
+    const elapsedTime = (currentTime - startTime) / 1000;
+    loadingTimeElement.innerHTML = `<b>Inference time:</b> ${elapsedTime.toFixed(2)} s`;
+  }, 100);
+}
+
+function stopTimer() {
+  clearInterval(timerInterval);
+}
+
+
 
 // Ladeanimation ein- oder ausschalten
 function setLoadingAnimationState(isLoading) {

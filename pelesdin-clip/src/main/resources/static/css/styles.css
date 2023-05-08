@@ -24,6 +24,14 @@ h1 {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.card2 {
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #D2D2D2;
+  height: 200px;
+}
 /* Formularstil */
 .form-label {
     font-weight: bold;
@@ -149,5 +157,26 @@ h1 {
   
   .result-container {
     min-height: 150px;
+  }
+  
+  /* Instruction-Container */
+  .instruction-container {
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .instruction-container h2 {
+    margin-bottom: 10px;
+  }
+  
+  .instruction-container ol {
+    list-style-type: decimal;
+    margin-left: 20px;
   }
   
