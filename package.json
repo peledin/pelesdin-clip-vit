@@ -1,0 +1,19 @@
+{
+  "name": "package.json",
+  "version": "1.0.0",
+  "description": "Hierbei handelt es sich um ein Webprojekt, das eine Deep Learning-Bild-Text-Vergleichsfunktion auf Basis von OpenAI's CLIP-Modell anbietet. Das Projekt verwendet das Spring Boot-Framework für das Backend und eine einfache HTML/CSS/JavaScript-Struktur für das Frontend.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/peledin/pelesdin-clip-vit.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/peledin/pelesdin-clip-vit/issues"
+  },
+  "homepage": "https://github.com/peledin/pelesdin-clip-vit#readme"
+}
