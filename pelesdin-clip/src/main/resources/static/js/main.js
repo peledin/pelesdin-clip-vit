@@ -91,15 +91,18 @@ function displayHint(probabilities) {
   const hintElement = document.getElementById("hint");
   const text1Percentage = probabilities[0] * 100;
   const text2Percentage = probabilities[1] * 100;
+  const higherPercentageText = text1Percentage > text2Percentage ? document.getElementById("text1").value : document.getElementById("text2").value;
 
   let hintText;
 
   if (text1Percentage >= 30 && text1Percentage <= 70 && text2Percentage >= 30 && text2Percentage <= 70) {
-    hintText = "The classification is inconclusive. Try to use other terms.";
+    hintText = "The classification is <b>inconclusive</b>. Try to use other terms.";
+  } else if ((text1Percentage > 5 && text1Percentage < 30) || (text1Percentage > 70 && text1Percentage < 95) || (text2Percentage > 5 && text2Percentage < 30) || (text2Percentage > 70 && text2Percentage < 95)) {
+    hintText = `The image is <b>more likely</b> to be classified as <strong>${higherPercentageText}</strong>.`;
   } else {
-    const higherPercentageText = text1Percentage > text2Percentage ? document.getElementById("text1").value : document.getElementById("text2").value;
-    hintText = `The image is more likely to be classified as <strong>${higherPercentageText}</strong>.`;
+    hintText = `The image is <b>very likely</b> to be classified as <strong>${higherPercentageText}</strong>.`;
   }
+  
 
   hintElement.innerHTML = hintText;
   hintElement.classList.remove("d-none");
@@ -151,6 +154,17 @@ document.getElementById("imageUrl").addEventListener("input", () => {
       progressBar.style.backgroundColor = "yellow";
     }
   }  
+  
+  function displayLoadingTime(loadingTime) {
+    let minutes = Math.floor(loadingTime / 60);
+    let seconds = (loadingTime % 60).toFixed(2);
+  
+    if (loadingTime >= 60) {
+      document.getElementById('loading-time').textContent = `Ladezeit: ${minutes}m ${seconds}s`;
+    } else {
+      document.getElementById('loading-time').textContent = `Ladezeit: ${seconds}s`;
+    }
+  }
   
 
   // Initialisiere die Bildvorschau und das imageURL-Eingabefeld mit einem zufälligen Bild
